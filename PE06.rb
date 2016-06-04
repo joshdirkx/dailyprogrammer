@@ -1,13 +1,21 @@
-def square_of_sum(input)
-  (1..input).inject(:+)**2
-end
+class SumSquareDifference
 
-def sum_of_square(input)
-  (1..input).to_a.map! { |i| i**2 }.inject(:+)
-end
+  class << self
 
-def find_diff(input)
-  square_of_sum(input) - sum_of_square(input)
-end
+    def find(input)
+      square_of_sum(input) - sum_of_square(input)
+    end
 
-find_diff(100)
+    private
+
+    def square_of_sum(input)
+      (1..input).inject(:+)**2
+    end
+
+    def sum_of_square(input)
+      (1..input).to_a.map! { |i| i**2 }.inject(:+)
+    end
+
+  end
+
+end
