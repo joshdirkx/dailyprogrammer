@@ -1,26 +1,31 @@
-# even fibonacci numbers under four million
+class Fibonacci
 
-@fib_seq = [1,2] # first two values
-@fib_index = 2   # first calculated value will be '3'
+  attr_accessor :sequence, :index, :sum
 
-def fibonacci(current_index)
-  next_item = @fib_seq[current_index - 2] + @fib_seq[current_index - 1]
-
-  if next_item < 4000000
-    @fib_seq.push(next_item)
-  else
-    return @fib_seq
+  def initialize
+    @sequence = [1,2]
+    @index = 2
+    @sum = 0
   end
 
-  fibonacci(@fib_index += 1)
-end
+  def run
+    find_next(@index)
+    @sequence.each { |i| @sum += i if i < 4000000 && i.even? }
+    return sum
+  end
 
-def even_sum
-  fibonacci(@fib_index)
-  sum = 0
-  @fib_seq.each { |i| sum += i if i < 4000000 && i.even? }
-  return sum
-end
+  private
 
-even_sum
-#answer = 4613732
+  def find_next(current_index)
+    next_item = @sequence[current_index - 2] + @sequence[current_index - 1]
+
+    if next_item < 4000000
+      @sequence.push(next_item)
+    else
+      return @sequence
+    end
+
+    find_next(@index += 1)
+  end
+
+end
